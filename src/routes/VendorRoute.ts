@@ -10,15 +10,12 @@ import {
 } from "../controllers";
 import { Authenticate } from "../middlewares";
 import multer from "multer";
-import path from "path";
 
 const router = express.Router();
 
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = path.join(__dirname, "functions", "images");
-
-    cb(null, uploadPath);
+    cb(null, "src/images");
   },
   filename: function (req, file, cb) {
     // cb(null, new Date().toISOString() + "_" + file.originalname);

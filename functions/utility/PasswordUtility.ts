@@ -6,11 +6,16 @@ import { APP_SECRET } from "../config";
 import { Request, Response, NextFunction } from "express";
 
 export const GenerateSalt = async () => {
-  return await bcrypt.genSalt();
+  const bcryptjs = require("bcryptjs");
+  const salt = bcryptjs.genSaltSync(10);
+  // return await bcrypt.genSalt();
+  return salt;
 };
 
 export const GeneratePassword = async (password: string, salt: string) => {
-  return await bcrypt.hash(password, salt);
+  const bcryptjs = require("bcryptjs");
+  return bcryptjs.hashSync(password, salt);
+  // return await bcrypt.hash(password, salt);
 };
 
 export const ValidatePassword = async (
